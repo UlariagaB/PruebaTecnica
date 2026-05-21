@@ -5,10 +5,9 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configurar In-Memory Database
 builder.Services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("WmsTestDb"));
 
-// Inyección de dependencias para el servicio de logística y HttpClient
+
 builder.Services.AddScoped<IRecepcionService, RecepcionService>();
 builder.Services.AddHttpClient();
 
@@ -18,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Crear el scope para asegurar que la DB en memoria se crea y se ejecute el Seeding
+
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();

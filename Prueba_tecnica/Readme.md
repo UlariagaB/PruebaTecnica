@@ -5,10 +5,11 @@ Bienvenido/a al desafio tecnico. Para respetar tu tiempo, hemos preparado este p
 ##  Contexto
 Estamos desarrollando un módulo para un **Sistema de Gestión de Almacenes (WMS)**.
 Necesitamos habilitar el registro de Recepción de Mercadería.
-El sistema ya cuenta con un proyecto .NET 8 configurado con una base de datos en memoria (Entity Framework Core) que se autocompleta con Productos y Ubicaciones al iniciar.
+El sistema ya cuenta con un proyecto .NET 8 configurado con una base de datos en memoria que se autocompleta con Productos y Ubicaciones al iniciar.
 
 ##  Tu Misión
-Debes implementar la lógica dentro del archivo `Services/IRecepcionService.cs` para que el endpoint de creación funcione correctamente. Existen reglas de negocio **obligatorias y excluyentes** que debes cumplir:
+Debes implementar la lógica dentro del archivo `Services/IRecepcionService.cs` para que el endpoint de creación funcione correctamente.
+Existen reglas de negocio **obligatorias y excluyentes** que debes cumplir:
 
 ### Regla 1: Validacion o Creacion del Producto
 El payload recibe un `SKU` (string) y una `Cantidad` (int). 
@@ -20,7 +21,7 @@ El payload recibe un `SKU` (string) y una `Cantidad` (int).
 Antes de guardar la recepción en la base de datos, debes validar que la `Cantidad` ingresada no supere el espacio disponible en la ubicación seleccionada. 
 * Si hay espacio, debes guardar la recepción y actualizar la `OcupacionActual` de la ubicación.
 
-### Regla 3: Trazabilidad Financiera (Redundancia Obligatoria)
+### Regla 3: Conversion de moneda
 La mercadería ingresa con un valor en USD, pero necesitamos guardarlo convertido a la moneda local en tiempo real. 
 * **Intento Primario:** Debes consumir una API pública de cotizaciones mediante `HttpClient` (ej. `https://api.exchangerate-api.com/v4/latest/USD`).
 * **Contingencia:** Los sistemas logísticos no pueden detenerse. Si la primera API falla debes consumir automáticamente una segunda API de respaldo (por ejemplo, la API pública de Binance o DolarHoy).

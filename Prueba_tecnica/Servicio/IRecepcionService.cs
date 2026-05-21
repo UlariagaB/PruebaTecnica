@@ -25,15 +25,7 @@ namespace Prueba_tecnica.Servicio
 
         public async Task<Recepcion> ProcesarRecepcionAsync(RecepcionDto request)
         {
-            // TODO: 1. Validar existencia del Producto
 
-            // TODO: 2. Validar que la capacidad de la Ubicación sea suficiente.
-
-            // TODO: 3. Obtener cotización de moneda mediante API externa.
-
-            // TODO: 4. Actualizar la ocupación de la Ubicación.
-
-            // TODO: 5. Guardar el nuevo registro de Recepción en la base de datos y retornarlo.
 
             throw new NotImplementedException("Error");
 
